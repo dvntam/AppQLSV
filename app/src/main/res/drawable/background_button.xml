@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+   <!--Hiển thị thông báo nhấn nút button-->
+
+    <item android:state_pressed="false">
+       <shape>
+           <!-- Màu nền btn-->
+           <solid android:color="#75A877" ></solid>
+           <!--Tạo viền cho btn-->
+           <stroke android:width="3dp"
+               android:color="#FFFFFF"></stroke>
+           <!--độ bo tròn góc btn-->
+           <corners android:radius="35dp"></corners>
+       </shape>
+    </item>
+    <item android:drawable="@color/design_default_color_primary_dark"
+        android:state_pressed="true">
+
+    </item>
+
+
+</selector>
