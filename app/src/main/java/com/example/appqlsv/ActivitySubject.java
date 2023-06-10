@@ -3,6 +3,7 @@ package com.example.appqlsv;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.room.Database;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -20,6 +21,8 @@ import com.example.appqlsv.adapter.adaptersubject ;
 import com.example.appqlsv.model.Subject;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
 
 public class ActivitySubject extends AppCompatActivity {
     Toolbar toolbar;
@@ -39,7 +42,7 @@ public class ActivitySubject extends AppCompatActivity {
         listViewsubject = findViewById(R.id.listviewSubject);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         database = new database(this);
 
@@ -61,20 +64,21 @@ public class ActivitySubject extends AppCompatActivity {
         listViewsubject.setAdapter(adaptersubject);
         cursor.moveToFirst();
         cursor.close();
-
-
-        listViewsubject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(ActivitySubject.this, ActivityStudent.class);
-                int id_student = ArrayListSubject.get(i).getId();
-                //Truyền dữ liệu id subject qua activity student
-                intent.putExtra("id_subject", id_student);
-                startActivity(intent);
-            }
-        });
+//
+/////Tạo sự kiện click vào item sẽ chuyển qua student
+//        listViewsubject.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Intent intent = new Intent(ActivitySubject.this, ActivityStudent.class);
+//                int id_student = ArrayListSubject.get(i).getId();
+//                //Truyền dữ liệu id subject qua activity student
+//                intent.putExtra("id_subject", id_student);
+//                startActivity(intent);
+//            }
+//        });
 
     }
+
 //Thêm một menu là add vào toolbar
 
 
@@ -87,18 +91,18 @@ public class ActivitySubject extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()) {
+        int menu= item.getItemId() ;{
             //Nếu click vào add thid chuyển qua màn hình add subject
-            case R.id.menuadd:
+            if (menu == R.id.menuadd) {
                 Intent intent1 = new Intent(ActivitySubject.this, ActivityAddSubject.class);
                 startActivity(intent1);
-                break;
+            }
 
             //Nếu click vào nút còn lại là nút back thì quay lại main
-            default:
+            else {
                 Intent intent = new Intent(ActivitySubject.this, MainActivity.class);
                 startActivity(intent);
-                break;
+            }
 
         }
 
